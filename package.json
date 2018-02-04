@@ -2,9 +2,11 @@
   "name": "participants",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://makker.github.io/exercise-participants/",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chance": "^1.0.13",
+    "gh-pages": "^1.1.0",
     "google-libphonenumber": "^3.0.10",
     "lodash": "^4.17.4",
     "node-sass-chokidar": "0.0.3",
