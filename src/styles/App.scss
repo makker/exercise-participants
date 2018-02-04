@@ -1,0 +1,125 @@
+.App {
+  text-align: center;
+  background-color: red;
+  width: 976px;
+  min-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  table {
+    width: 912px;
+    background-color: white;
+    margin: 0 auto 1px auto;
+    td {
+      color: #505050;
+      height: 71px;
+    }
+    td, th {
+      text-align: left;
+      padding: 16px 0 15px 16px;
+      color: #505050;
+      margin-right: 2px;
+  
+      &:first-child {
+        width: 180px;
+        input {
+          width: 164px;
+        }
+      }
+      &:nth-child(2) {
+        width: 292px;
+        input {
+          width: 275px;
+        }
+      }
+      &:nth-child(3) {
+        width: 211px;
+        input {
+          width: 195px;
+        }
+      }
+      &:nth-child(4) {
+        text-align: right;
+        width: calc(912px - 180px - 292px - 211px);
+        padding-right: 16px;
+      }
+    }
+    th {
+      color: #757575;
+      min-height: 47px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 15px 0 12px 24px;
+      &.orderBy {
+        color: #505050;
+        .orderButton {
+          img {
+            display: inline;
+          }
+          &:hover img {
+            display: inline;
+            opacity: 1;
+          }
+        }
+      }
+      &:not(:first-child) {
+        padding-left: 23px;
+      }
+      .iconOrder {
+        height: 12px;
+        margin-left: 8px;
+        margin-bottom: 1px;
+      }
+      .orderButton {
+        font-size: 14px;
+        padding: 0;
+        border: none;
+        background-color: white;
+        background-color: transparent;
+        img {
+          display: none;
+        }
+        &:hover img {
+          display: inline;
+          opacity: .5;
+        }
+      }
+    }
+  }
+}
+
+.App-logo {
+  height: 32px;
+}
+
+.App-header {
+  background-color: #adb5bd;
+  height: 96px;
+  padding: 32px;
+  color: white;
+  text-align: left;
+}
+
+%title {
+  font-size: 24px;
+  text-align: left;
+  font-weight: 500;
+}
+.App-title {
+  @extend %title;
+  color: #757575;
+  margin: 67px 0 35px 32px;
+}
+.App-company {
+  @extend %title;
+  color: white;
+  display: inline;
+  vertical-align: middle;
+  margin-left: 11.5px;
+}
+button, input, .btn {
+  &:focus, &:active, &.btn:active:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

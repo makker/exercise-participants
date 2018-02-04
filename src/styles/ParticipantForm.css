@@ -1,0 +1,54 @@
+table.form-table.add-table {
+  margin-bottom: 9px; }
+  table.form-table.add-table button {
+    padding: 0 23px; }
+
+table.form-table input {
+  background-color: #fafafa;
+  height: 40px;
+  border: #eee solid 1px;
+  padding-left: 14px;
+  padding-top: 0; }
+  table.form-table input::placeholder {
+    color: #909090; }
+
+table.form-table button:not(.orderButton) {
+  height: 40px;
+  border-radius: 0;
+  color: #757575;
+  background-color: #ededed;
+  font-size: 16px;
+  padding: 0 21px;
+  font-weight: 500; }
+  table.form-table button:not(.orderButton)[type='submit'] {
+    margin-left: 7px;
+    background-color: #07F;
+    color: white; }
+    table.form-table button:not(.orderButton)[type='submit'][disabled] {
+      background-color: #ededed;
+      color: #757575;
+      cursor: not-allowed;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      opacity: 1; }
+  table.form-table button:not(.orderButton).cancelBtn {
+    color: #07F; }
+
+table.form-table tr.formError td {
+  height: auto;
+  padding: 2px 5px 4px 24px;
+  color: red;
+  font-size: 14px; }
+
+table.list-table tr td {
+  padding-left: 24px; }
+  table.list-table tr td:not(:first-child) {
+    padding-left: 25px; }
+
+table.list-table button {
+  padding: 4px 8px;
+  background-color: white;
+  border-width: 0; }
+  table.list-table button img.imageBtn {
+    height: 24px;
+    margin-left: 16px; }

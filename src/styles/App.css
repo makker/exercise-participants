@@ -1,0 +1,94 @@
+.App {
+  text-align: center;
+  background-color: red;
+  width: 976px;
+  min-height: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  .App table {
+    width: 912px;
+    background-color: white;
+    margin: 0 auto 1px auto; }
+    .App table td {
+      color: #505050;
+      height: 71px; }
+    .App table td, .App table th {
+      text-align: left;
+      padding: 16px 0 15px 16px;
+      color: #505050;
+      margin-right: 2px; }
+      .App table td:first-child, .App table th:first-child {
+        width: 180px; }
+        .App table td:first-child input, .App table th:first-child input {
+          width: 164px; }
+      .App table td:nth-child(2), .App table th:nth-child(2) {
+        width: 292px; }
+        .App table td:nth-child(2) input, .App table th:nth-child(2) input {
+          width: 275px; }
+      .App table td:nth-child(3), .App table th:nth-child(3) {
+        width: 211px; }
+        .App table td:nth-child(3) input, .App table th:nth-child(3) input {
+          width: 195px; }
+      .App table td:nth-child(4), .App table th:nth-child(4) {
+        text-align: right;
+        width: calc(912px - 180px - 292px - 211px);
+        padding-right: 16px; }
+    .App table th {
+      color: #757575;
+      min-height: 47px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 15px 0 12px 24px; }
+      .App table th.orderBy {
+        color: #505050; }
+        .App table th.orderBy .orderButton img {
+          display: inline; }
+        .App table th.orderBy .orderButton:hover img {
+          display: inline;
+          opacity: 1; }
+      .App table th:not(:first-child) {
+        padding-left: 23px; }
+      .App table th .iconOrder {
+        height: 12px;
+        margin-left: 8px;
+        margin-bottom: 1px; }
+      .App table th .orderButton {
+        font-size: 14px;
+        padding: 0;
+        border: none;
+        background-color: white;
+        background-color: transparent; }
+        .App table th .orderButton img {
+          display: none; }
+        .App table th .orderButton:hover img {
+          display: inline;
+          opacity: .5; }
+
+.App-logo {
+  height: 32px; }
+
+.App-header {
+  background-color: #adb5bd;
+  height: 96px;
+  padding: 32px;
+  color: white;
+  text-align: left; }
+
+.App-title, .App-company {
+  font-size: 24px;
+  text-align: left;
+  font-weight: 500; }
+
+.App-title {
+  color: #757575;
+  margin: 67px 0 35px 32px; }
+
+.App-company {
+  color: white;
+  display: inline;
+  vertical-align: middle;
+  margin-left: 11.5px; }
+
+button:focus, button:active, button.btn:active:focus, input:focus, input:active, input.btn:active:focus, .btn:focus, .btn:active, .btn.btn:active:focus {
+  outline: none;
+  box-shadow: none; }
