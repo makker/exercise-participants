@@ -1,0 +1,1 @@
+This repo has two parts. Web folder includes the React client and Api folder has the backend api to MongoDB. To install MongoDB as required see https://www.codementor.io/olatundegaruba/nodejs-restful-apis-in-10-minutes-q0sgsfhbd
