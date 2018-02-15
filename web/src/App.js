@@ -8,6 +8,7 @@ import logo from './assets/logo.png';
 import iconOrder from './assets/arrow_down.png';
 
 const chance = new Chance();
+const apiUrl = "/api/participants/";
 
 class App extends Component {
   constructor() {
@@ -19,11 +20,11 @@ class App extends Component {
       emailLabelClass: "",
       phoneLabelClass: ""
     }
-    for (var i = 1; i <= 20; i++) {
+    for (var i = 1; i <= 0; i++) {
       var firstName = chance.first();
       var lastName = chance.last();
       var participant = {};
-      participant.id = chance.guid();
+      participant._id = chance.guid();
       participant.name = firstName +" "+ lastName;
       participant.email = firstName.toLowerCase() +"."+ lastName.toLowerCase() +"@"+ chance.domain();
       participant.phone = chance.phone({mobile: true});
@@ -31,22 +32,94 @@ class App extends Component {
       this.state.participants.push(participant);
     }
   }
+  checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    }
+    const error = new Error(`HTTP Error ${response.statusText}`);
+    error.status = response.statusText;
+    error.response = response;
+    console.log(error); // eslint-disable-line no-console
+    throw error;
+  }
+  componentDidMount() {
+    fetch(apiUrl, {
+      accept: "application/json"
+    }) 
+      .then(this.checkStatus)
+      .then(result => result.json())
+      .then(arr => {
+        this.setState((prev) => { 
+          return { participants: prev.participants.concat(arr) } 
+        });
+      });
+  }
   updateParticipant(participant) {
-    this.setState(function(prevState, props) {
-      if (participant.id === undefined) {
-        // Adding new, create a unike key for each new participant item
-        participant.id = chance.guid();
-        prevState.participants.push(participant);
-      } else {
-        // updating
-        prevState.participants[_.findIndex(prevState.participants, { id: participant.id })] = participant;
-      }
-      return { participants: prevState.participants };
-    });
+    if (participant._id === undefined) {
+      fetch(apiUrl, {
+        method: "POST",
+        accept: "application/json",
+        body: JSON.stringify(participant),
+        headers: {
+          'content-type': 'application/json'
+        },
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        mode: 'cors',
+      })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => { 
+          this.setState(function(prevState, props) {
+            console.log('Success:', response, prevState);
+            prevState.participants.push(response);
+            return { participants: prevState.participants };
+          });
+        });
+    } else {
+      // updating
+
+      this.setState(function(prevState, props) {
+        console.log("update participant: ", participant);
+        prevState.participants[_.findIndex(prevState.participants, { _id: participant._id })] = participant;
+
+        return { participants: prevState.participants };
+      });
+        
+      fetch(apiUrl + participant._id, {
+        method: "PUT",
+        accept: "application/json",
+        body: JSON.stringify(participant),
+        headers: {
+          'content-type': 'application/json'
+        },
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        mode: 'cors',
+      })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+    }
   }
   deleteParticipant(guid) {
     this.setState(function(prevState, props) {
-      var participants = _.reject(prevState.participants, { id: guid });
+      var participants = _.reject(prevState.participants, { _id: guid });
+
+      fetch(apiUrl + guid, {
+        method: "DELETE",
+        accept: "application/json",
+        headers: {
+          'content-type': 'application/json'
+        },
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        mode: 'cors',
+      })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+
       return {participants: participants };
    });
   }

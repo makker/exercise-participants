@@ -1,0 +1,34 @@
+{
+  "name": "participantsapi",
+  "version": "1.0.0",
+  "description": "RESTful participantsApi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makker/exercise-participants.git"
+  },
+  "keywords": [
+    "nodejs",
+    "restfull",
+    "api",
+    "toparticipants",
+    "react"
+  ],
+  "author": "Markus Ruottu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makker/exercise-participants/issues"
+  },
+  "homepage": "https://github.com/makker/exercise-participants/web/#readme",
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^5.0.5"
+  }
+}

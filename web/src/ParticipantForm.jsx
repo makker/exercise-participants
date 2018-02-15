@@ -29,7 +29,7 @@ class ParticipantForm extends Component {
     })
   }
   delete = (e) => {
-    this.props.deleteParticipant(this.props.participant.id);
+    this.props.deleteParticipant(this.props.participant._id);
   }
   cancelEdit = (e) => {
     this.setState({
@@ -88,7 +88,7 @@ class ParticipantForm extends Component {
     e.preventDefault();
 
     var participant = { 
-      id: (this.state.add) ? undefined : this.props.participant.id,
+      _id: (this.state.add) ? undefined : this.props.participant._id,
       name: this.inputName.value, 
       email: this.inputEmail.value, 
       phone: this.inputPhone.value 
