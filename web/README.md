@@ -6,6 +6,6 @@ To install the app:
 
 If there's any problems contact https://github.com/makker
 
-
+End result can be found online here: https://makker.github.io/exercise-participants/index.html
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
