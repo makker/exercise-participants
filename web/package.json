@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/api/",
-  "homepage": "https://makker.github.io/exercise-participants/",
+  "homepage": "http://makker.net/participants/",
+  "homepage_": "https://makker.github.io/participants/",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chance": "^1.0.13",

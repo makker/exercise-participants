@@ -8,7 +8,7 @@ import logo from './assets/logo.png';
 import iconOrder from './assets/arrow_down.png';
 
 const chance = new Chance();
-const apiUrl = "/api/participants/";
+const apiUrl = "https://2gvowq07ki.execute-api.eu-central-1.amazonaws.com/dev/api/participants/"; //(window.location.host.indexOf("localhost") > -1) ? "/api/participants/" : "https://2gvowq07ki.execute-api.eu-central-1.amazonaws.com/dev/api/participants/";
 
 class App extends Component {
   constructor() {
@@ -43,9 +43,7 @@ class App extends Component {
     throw error;
   }
   componentDidMount() {
-    fetch(apiUrl, {
-      accept: "application/json"
-    }) 
+    fetch(apiUrl) 
       .then(this.checkStatus)
       .then(result => result.json())
       .then(arr => {
