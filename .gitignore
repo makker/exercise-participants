@@ -9,7 +9,8 @@ node_modules
 
 # production
 */build
-*/.serverless
+.serverless
+README.md
 
 # misc
 .DS_Store
