@@ -193,7 +193,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-app",
               "Handler": "index.handler",
@@ -234,7 +234,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-createParticipant",
               "Handler": "index.handler",
@@ -275,7 +275,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-getParticipants",
               "Handler": "index.handler",
@@ -316,7 +316,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-getParticipant",
               "Handler": "index.handler",
@@ -357,7 +357,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-updateParticipant",
               "Handler": "index.handler",
@@ -398,7 +398,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z/participants-api.zip"
+                "S3Key": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z/participants-api.zip"
               },
               "FunctionName": "participants-api-dev-deleteParticipant",
               "Handler": "index.handler",
@@ -492,6 +492,52 @@
                 "Ref": "ApiGatewayResourceApiParticipants"
               },
               "PathPart": "{proxy+}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodApiParticipantsOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiParticipants"
+              },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -773,7 +819,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1519129140051": {
+          "ApiGatewayDeployment1519204607389": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1131,7 +1177,30 @@
         "handler": "index.handler",
         "events": [
           {
-            "http": "GET /api/participants"
+            "http": {
+              "method": "get",
+              "path": "api/participants",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
           }
         ],
         "name": "participants-api-dev-getParticipants",
@@ -1202,7 +1271,7 @@
     "artifact": "E:\\workspace\\participants\\aws-api\\.serverless\\participants-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/participants-api/dev/1519129139577-2018-02-20T12:18:59.577Z",
+    "artifactDirectoryName": "serverless/participants-api/dev/1519204606919-2018-02-21T09:16:46.919Z",
     "artifact": "participants-api.zip"
   }
 }

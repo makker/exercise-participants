@@ -40,7 +40,13 @@ functions:
   getParticipants:
     handler: index.handler
     events:
-      - http: 'GET /api/participants'
+      - http: 
+          method: get
+          path: api/participants
+          cors: true    # This doesn't seem to work in current case 
+                        # (maybe because express server?)
+                        # Maybe this does the API Gateway cors settings
+                        # See https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/serverless.yml.md
 
   getParticipant:
     handler: index.handler
