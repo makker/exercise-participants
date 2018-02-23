@@ -52,6 +52,22 @@ table {
     }
   }
   &.list-table {
+    transition-duration: 0.7s;
+    transition-property: background-color, height;
+    transition-timing-function: ease-in-out;
+    &.deleting {
+      background-color: rgb(241, 172, 172);
+    }
+    &.anim-out {
+      height: 0;
+      td {
+        transition-duration: 0.8s;
+        transition-property: height;
+        transition-timing-function: ease-in-out;
+        height: 0;
+        padding: 0;
+      }
+    }
     tr td {
       padding-left: 24px;
       &:not(:first-child) {

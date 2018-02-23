@@ -65,14 +65,18 @@ functions:
   updateParticipant:
     handler: index.update_a_participant
     events:
-      - http: 'PUT /api/participants/{participantId}'
-        cors: true
+      - http: 
+          method: put
+          path: api/participants/{participantId}
+          cors: true
 
   deleteParticipant:
     handler: index.delete_a_participant
     events:
-      - http: 'DELETE /api/participants/{participantId}'
-        cors: true
+      - http: 
+          method: delete
+          path: api/participants/{participantId}
+          cors: true
 
 resources:
   Resources:

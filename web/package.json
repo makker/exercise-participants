@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/api/",
-  "homepage": "http://makker.net/participants/",
+  "homepage": ".",
   "homepage_": "https://makker.github.io/participants/",
   "dependencies": {
     "bootstrap": "^3.3.7",

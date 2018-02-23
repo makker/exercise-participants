@@ -12,6 +12,7 @@ class ParticipantForm extends Component {
     this.state = {
       form: false,
       add: false,
+      deleting: false,
       formErrors: {name: '', email: '', phone: ''},
       nameValid: false,
       emailValid: false,
@@ -29,6 +30,9 @@ class ParticipantForm extends Component {
     })
   }
   delete = (e) => {
+    this.setState({
+      deleting: true
+    })
     this.props.deleteParticipant(this.props.participant._id);
   }
   cancelEdit = (e) => {
@@ -157,21 +161,37 @@ class ParticipantForm extends Component {
                   </table>
                 </form>
     } else {
-      content = <table className="list-table">
+      let tableClasses = "list-table";
+      if ( this.state.deleting ) tableClasses += " deleting";
+      let row;
+      if ( this.props.participant.deleteAnim ) {
+        tableClasses += " anim-out";
+
+        row = <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>;
+      } else {
+        row = <tr>
+                <td>{ participant.name }</td>
+                <td>{ participant.email }</td>
+                <td>{ participant.phone }</td>
+                <td>
+                  <button type="button" id="edit" className="btn" onClick={ this.edit }>
+                    <img alt="Edit" src={ imgEdit } className="imageBtn" />
+                  </button>
+                  <button type="button" id="delete" className="btn" onClick={ this.delete }>
+                    <img alt="Edit" src={ imgDel } className="imageBtn" />
+                  </button>
+                </td>
+              </tr>;
+      }
+
+      content = <table className={ tableClasses }>
                   <tbody>
-                    <tr>
-                      <td>{ participant.name }</td>
-                      <td>{ participant.email }</td>
-                      <td>{ participant.phone }</td>
-                      <td>
-                        <button type="button" id="edit" className="btn" onClick={ this.edit }>
-                          <img alt="Edit" src={ imgEdit } className="imageBtn" />
-                        </button>
-                        <button type="button" id="delete" className="btn" onClick={ this.delete }>
-                          <img alt="Edit" src={ imgDel } className="imageBtn" />
-                        </button>
-                      </td>
-                    </tr>
+                    { row }
                   </tbody>
                 </table>;
     }

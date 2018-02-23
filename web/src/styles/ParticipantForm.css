@@ -40,15 +40,28 @@ table.form-table tr.formError td {
   color: red;
   font-size: 14px; }
 
-table.list-table tr td {
-  padding-left: 24px; }
-  table.list-table tr td:not(:first-child) {
-    padding-left: 25px; }
-
-table.list-table button {
-  padding: 4px 8px;
-  background-color: white;
-  border-width: 0; }
-  table.list-table button img.imageBtn {
-    height: 24px;
-    margin-left: 16px; }
+table.list-table {
+  transition-duration: 0.7s;
+  transition-property: background-color, height;
+  transition-timing-function: ease-in-out; }
+  table.list-table.deleting {
+    background-color: #f1acac; }
+  table.list-table.anim-out {
+    height: 0; }
+    table.list-table.anim-out td {
+      transition-duration: 0.8s;
+      transition-property: height;
+      transition-timing-function: ease-in-out;
+      height: 0;
+      padding: 0; }
+  table.list-table tr td {
+    padding-left: 24px; }
+    table.list-table tr td:not(:first-child) {
+      padding-left: 25px; }
+  table.list-table button {
+    padding: 4px 8px;
+    background-color: white;
+    border-width: 0; }
+    table.list-table button img.imageBtn {
+      height: 24px;
+      margin-left: 16px; }

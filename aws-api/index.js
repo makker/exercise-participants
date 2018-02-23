@@ -37,7 +37,7 @@ const responseNotFound = Object.assign( { statusCode: 404 }, corsHeader);
 const responseBad = (error) => {
   return Object.assign( {
     statusCode: 400,
-    body: { error }
+    body: JSON.stringify({ error })
   }, corsHeader);
 };
 
@@ -69,20 +69,23 @@ module.exports.list_all_participants = function (event, context, callback) {
   dynamoDb.scan(Object.assign( { Limit: 500 }, params))
     .promise()
     .then((result) => { 
-      //const res = Object.assign( { body: result.Items }, responseOK);
-      const res = Object.assign( { body: "TESTING" }, responseOK);
-      res.headers["Content-Type"] = "text/html";
-      callback(null, JSON.stringify(res));
+      const res = Object.assign({ 
+          body: JSON.stringify(result.Items)
+        }, 
+        responseOK);
+      //const res = Object.assign( { body: "TESTING" }, responseOK);
+      //res.headers["Content-Type"] = "text/html";
+      callback(null, res);
     })
     .catch(error => {
       console.log(error);
-      callback(null, JSON.stringify(responseBad("Could not get participants")));
+      callback(null, responseBad("Could not get participants"));
     });
 };
 
 module.exports.create_a_participant = function (event, context, callback) {
   const { name, email, phone } = JSON.parse(event.body);
-  let res;
+
   if (typeof name !== 'string') {
     callback(null, responseBad('"name" must be a string'));
   } else if (typeof email !== 'string') {
@@ -91,11 +94,13 @@ module.exports.create_a_participant = function (event, context, callback) {
     callback(null, responseBad('"phone" must be a string'));
   }
 
-  const _id = uuid.v1();
+  const _id = uuid.v4();
   dynamoDb.put(paramsItem(_id, name, email, phone))
     .promise()
     .then((result) => { 
-      callback(null, Object.assign( { body: { _id, name, email, phone }, responseOK }));
+      callback(null, Object.assign( 
+        { body: JSON.stringify({ _id, name, email, phone }) }, 
+        responseOK ));
     })
     .catch(error => {
       console.log(error);
@@ -109,9 +114,11 @@ module.exports.read_a_participant = function (event, context, callback) {
     .then((result) => {
       let res;
       if (result.Item) {
-        res = Object.assign( { body: result.Item }, responseOK);
+        res = Object.assign( { body: JSON.stringify(result.Item) }, responseOK);
       } else {
-        res = Object.assign( { body: { error: "Participant not found" }}, responseNotFound );
+        res = Object.assign( 
+          { body: JSON.stringify({ error: "Participant not found" }) }, 
+          responseNotFound );
       }
       callback(null, res);
     })
@@ -137,7 +144,7 @@ module.exports.update_a_participant = function (event, context, callback) {
     .promise()
     .then((result) => {
       callback(null, Object.assign( { 
-          body: { _id, name, email, phone }
+          body: JSON.stringify( { _id, name, email, phone } )
         }, responseOK ));
       })
     .catch((error) => {
@@ -150,9 +157,9 @@ module.exports.delete_a_participant = function (event, context, callback) {
   dynamoDb.delete(paramsKeyId(event.pathParameters.participantId))
   .promise()
   .then((result) => {
-    callback(null, Object.assign( { 
-        body: { result: "Delete participant succeeded" }
-      }, responseOK ));
+    callback(null, Object.assign( 
+      { body: JSON.stringify( { result: "Delete participant succeeded" } ) }, 
+      responseOK ));
     })
   .catch((error) => {
     console.log(error);

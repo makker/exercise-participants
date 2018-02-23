@@ -4,7 +4,6 @@ import ParticipantForm from './ParticipantForm.jsx'
 import Chance from 'chance';
 import _ from 'lodash';
 import './styles/App.css';
-import logo from './assets/logo.png';
 import iconOrder from './assets/arrow_down.png';
 
 const chance = new Chance();
@@ -54,6 +53,8 @@ class App extends Component {
   }
   updateParticipant(participant) {
     if (participant._id === undefined) {
+      // add new
+
       fetch(apiUrl, {
         method: "POST",
         accept: "application/json",
@@ -74,11 +75,11 @@ class App extends Component {
             return { participants: prevState.participants };
           });
         });
+
     } else {
       // updating
 
       this.setState(function(prevState, props) {
-        console.log("update participant: ", participant);
         prevState.participants[_.findIndex(prevState.participants, { _id: participant._id })] = participant;
 
         return { participants: prevState.participants };
@@ -101,25 +102,36 @@ class App extends Component {
     }
   }
   deleteParticipant(guid) {
-    this.setState(function(prevState, props) {
-      var participants = _.reject(prevState.participants, { _id: guid });
 
-      fetch(apiUrl + guid, {
-        method: "DELETE",
-        accept: "application/json",
-        headers: {
-          'content-type': 'application/json'
-        },
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        mode: 'cors',
-      })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+    fetch(apiUrl + guid, {
+      method: "DELETE",
+      accept: "application/json",
+      headers: {
+        'content-type': 'application/json'
+      },
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      mode: 'cors',
+    })
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+      console.log('Success:', response);
+      
+      this.setState(function(prevState, props) {
+        prevState.participants[_.findIndex(prevState.participants, { _id: guid })].deleteAnim = true;
 
-      return {participants: participants };
-   });
+        return { participants: prevState.participants };
+      });
+
+      setTimeout(() => {
+        /* this.setState(function(prevState, props) {
+
+          var participants = _.reject(prevState.participants, { _id: guid });
+          return {participants: participants };
+        });*/
+      }, 1000); 
+    });
   }
   orderBy(byVal){
     if (byVal === "name" || byVal === "email" || byVal === "phone") {
@@ -146,7 +158,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={ logo } className="App-logo" alt="logo" /> <h1 className="App-company">Nord Software</h1>
+          <h1 className="App-company">Makker Software</h1>
         </div>
         <h1 className="App-title">List of participants</h1>
         <div className="component-wrapper">
@@ -175,7 +187,7 @@ class App extends Component {
           </table>
           { this.state.participants.map( (participant, i) => {
               return (
-                <ParticipantForm participant={ participant } key={ i } add={ false } updateParticipant={ this.updateParticipant.bind(this) } deleteParticipant={ this.deleteParticipant.bind(this) } />
+                <ParticipantForm participant={ participant } key={ participant._id } add={ false } updateParticipant={ this.updateParticipant.bind(this) } deleteParticipant={ this.deleteParticipant.bind(this) } />
               )
             })
           }
