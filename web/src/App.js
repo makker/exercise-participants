@@ -8,7 +8,7 @@ import logo from './assets/logo.png';
 import iconOrder from './assets/arrow_down.png';
 
 const chance = new Chance();
-const apiUrl = "https://2gvowq07ki.execute-api.eu-central-1.amazonaws.com/dev/api/participants/"; //(window.location.host.indexOf("localhost") > -1) ? "/api/participants/" : "https://2gvowq07ki.execute-api.eu-central-1.amazonaws.com/dev/api/participants/";
+const apiUrl = "https://izw9wr0rjb.execute-api.eu-central-1.amazonaws.com/dev/api/participants/"; //(window.location.host.indexOf("localhost") > -1) ? "/api/participants/" : "https://2gvowq07ki.execute-api.eu-central-1.amazonaws.com/dev/api/participants/";
 
 class App extends Component {
   constructor() {

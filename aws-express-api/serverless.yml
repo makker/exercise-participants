@@ -1,7 +1,7 @@
-service: participants-api
+service: participants-express-api
 
 custom:
-  tableName: 'participants-table-${self:provider.stage}'
+  tableName: 'participants-table-express-${self:provider.stage}'
   dynamodb:
     start:
       migrate: true
@@ -26,25 +26,19 @@ provider:
     PARTICIPANTS_TABLE: ${self:custom.tableName}
 
 functions:
-
-  helloRoot:
-    handler: index.helloRoot
+  app:
+    handler: index.handler
     events:
       - http: ANY /
-        cors: true
       - http: 'ANY {proxy+}'
-        cors: true
 
   createParticipant:
-    handler: index.create_a_participant
+    handler: index.handler
     events:
-      - http: 
-          method: post
-          path: api/participants
-          cors: true
+      - http: 'POST /api/participants'
       
   getParticipants:
-    handler: index.list_all_participants
+    handler: index.handler
     events:
       - http: 
           method: get
@@ -55,24 +49,19 @@ functions:
                         # See https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/serverless.yml.md
 
   getParticipant:
-    handler: index.read_a_participant
+    handler: index.handler
     events:
-      - http: 
-          method: get
-          path: api/participants/{participantId}
-          cors: true
+      - http: 'GET /api/participants/{proxy+}'
 
   updateParticipant:
-    handler: index.update_a_participant
+    handler: index.handler
     events:
-      - http: 'PUT /api/participants/{participantId}'
-        cors: true
+      - http: 'PUT /api/participants/{proxy+}'
 
   deleteParticipant:
-    handler: index.delete_a_participant
+    handler: index.handler
     events:
-      - http: 'DELETE /api/participants/{participantId}'
-        cors: true
+      - http: 'DELETE /api/participants/{proxy+}'
 
 resources:
   Resources:
